@@ -31,4 +31,4 @@ python ./code/bash/V1/aste_14lap.sh
 If you use the code in your paper, please kindly star this repo and cite our paper.
 
 ## Note
-* Code of this repo heavily relies on [ABSA-PyTorch](https://github.com/songyouwei/ABSA-PyTorch) and [ASGCN](https://github.com/GeneZC/ASGCN)
+* Code of this repo heavily relies on [BDTF-ABSA](https://github.com/HITSZ-HLT/BDTF-ABSA).
