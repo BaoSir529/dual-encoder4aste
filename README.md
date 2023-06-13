@@ -6,7 +6,7 @@ Jiang Baoxing, Liang Shehui, Liu Peiyu, Dong Kaifang & Li Hongye A semantically 
 * PyTorch 1.12
 * SpaCy 3.3.1
 * numpy 1.21.5
-* LIGHTNING >=1.5.0
+* lightning >=1.5.0
 * argparse 1.4.0
 * scikit-learn 1.0.2
 * einops
