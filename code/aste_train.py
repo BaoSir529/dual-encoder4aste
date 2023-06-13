@@ -41,10 +41,10 @@ from utils import params_count
 
 logger = logging.getLogger(__name__)
 
-general_embedding = numpy.load('../data/V1/16res/glove.npy')
-general_embedding = torch.from_numpy(general_embedding)
-domain_embedding = numpy.load('../data/V1/16res/amazon.npy')
-domain_embedding = torch.from_numpy(domain_embedding)
+# general_embedding = numpy.load('../data/V1/16res/glove.npy')
+# general_embedding = torch.from_numpy(general_embedding)
+# domain_embedding = numpy.load('../data/V1/16res/amazon.npy')
+# domain_embedding = torch.from_numpy(domain_embedding)
 
 
 class ASTE(pl.LightningModule):
@@ -67,10 +67,10 @@ class ASTE(pl.LightningModule):
         self.config.interaction_num = self.hparams.interaction_num
         self.config.use_interaction = self.hparams.use_interaction
 
-        # general_embedding = numpy.load('../data/V1/16res/glove.npy')
-        # self.general_embedding = torch.from_numpy(general_embedding)
-        # domain_embedding = numpy.load('../temp/V1/16res/amazon.npy')
-        # self.domain_embedding = torch.from_numpy(domain_embedding)
+        general_embedding = numpy.load(self.config.data_dir+'/glove.npy')
+        self.general_embedding = torch.from_numpy(general_embedding)
+        domain_embedding = numpy.load(self.config.data_dir+'/amazon.npy')
+        self.domain_embedding = torch.from_numpy(domain_embedding)
 
         if self.config.use_interaction:
             self.model = BDTFModel.from_pretrained(self.hparams.model_name_or_path, config=self.config, gen_embed=self.general_embedding, domain_embed=self.domain_embedding)
