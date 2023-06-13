@@ -10,7 +10,7 @@ import numpy as np
 
 
 def glove_embed(word2idx):
-    f = open(r'C:\Embedding\glove.840B.300d.txt', 'rb')
+    f = open(r'..\embedding\glove.840B.300d.txt', 'rb')
     embeddings_dict = {}
     for line in f:
         values = line.split()
@@ -39,7 +39,7 @@ def glove_embed(word2idx):
 
 
 def review_embed(word2idx):
-    f = open(r'C:\Embedding\amazon_product_review_corpus.particle_verbs.cbow.w5.d500.txt', 'rb')
+    f = open(r'..\embedding\amazon_product_review_corpus.particle_verbs.cbow.w5.d500.txt', 'rb')
     embeddings_dict = {}
     for line in f:
         values = line.split()
