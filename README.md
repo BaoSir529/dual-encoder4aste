@@ -6,10 +6,12 @@ Jiang Baoxing, Liang Shehui, Liu Peiyu, Dong Kaifang & Li Hongye A semantically 
 * PyTorch 1.12
 * SpaCy 3.3.1
 * numpy 1.21.5
-* lightning >=1.5.0
+* pytorch-lightning =1.3.5
 * argparse 1.4.0
 * scikit-learn 1.0.2
-* einops
+* einops =0.4.0
+* transformers =4.15.0
+* torchmetrics =0.7.0
 
 ## Usage
 
