@@ -5,7 +5,6 @@ import logging
 import argparse
 import random
 import numpy
-import pyttsx3
 import warnings
 warnings.filterwarnings('ignore')
 
@@ -67,9 +66,9 @@ class ASTE(pl.LightningModule):
         self.config.interaction_num = self.hparams.interaction_num
         self.config.use_interaction = self.hparams.use_interaction
 
-        general_embedding = numpy.load(self.config.data_dir+'/glove.npy')
+        general_embedding = numpy.load(self.hparams.data_dir+'/glove.npy')
         self.general_embedding = torch.from_numpy(general_embedding)
-        domain_embedding = numpy.load(self.config.data_dir+'/amazon.npy')
+        domain_embedding = numpy.load(self.hparams.data_dir+'/amazon.npy')
         self.domain_embedding = torch.from_numpy(domain_embedding)
 
         if self.config.use_interaction:
@@ -92,7 +91,7 @@ class ASTE(pl.LightningModule):
     def load_model(self):
         dir_name = os.path.join(self.hparams.output_dir, str(self.hparams.cuda_ids), 'model')
         print(f'## load model to {dir_name}')
-        self.model = BDTFModel.from_pretrained(dir_name, config=self.config, gen_embed=general_embedding, domain_embed=domain_embedding)
+        self.model = BDTFModel.from_pretrained(dir_name, config=self.config, gen_embed=self.general_embedding, domain_embed=self.domain_embedding)
         
     def forward(self, **inputs):
         # print(inputs['ids'])
@@ -273,6 +272,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-    engine = pyttsx3.init()
-    engine.say("老板 程序运行结束 请返回查看结果")
-    engine.runAndWait()
