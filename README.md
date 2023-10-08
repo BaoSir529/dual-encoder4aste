@@ -17,7 +17,7 @@ Jiang Baoxing, Liang Shehui, Liu Peiyu, Dong Kaifang & Li Hongye A semantically 
 
 * Download pretrained GloVe embeddings with this [link](http://nlp.stanford.edu/data/wordvecs/glove.840B.300d.zip) and unzip `glove.840B.300d.txt` into `./embedding/GloVe/`.
 * Download pretrained "Word Embedding of Amazon Product Review Corpus" with this [link](https://zenodo.org/record/3370051) and unzip into `./embedding/Particular/`.
-* Prepare data for models, run the code [v1_data_process.py](./data/v1_data_process.py) and [v1_word2ids.py](./data/v1_word2ids.py).
+* Prepare data for models, run the code [v1_data_process.py](./data/v1_data_process.py) and [v1_word2ids.py](./data/v1_word2ids.py), same for the v2 dataset.
 ```bash
 python ./data/v1_data_process.py
 python ./data/v1_word2ids.py
