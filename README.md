@@ -1,5 +1,5 @@
 # dual-encoder4aste
-Jiang Baoxing, Liang Shehui, Liu Peiyu, Dong Kaifang & Li Hongye A semantically enhanced dual encoder for aspect sentiment triplet extraction (Submit to KBS)
+Code to support the paper “Jiang Baoxing, Liang Shehui, Liu Peiyu, Dong Kaifang & Li Hongye, A semantically enhanced dual encoder for aspect sentiment triplet extraction, Neurocomputing, 2023”
 
 ## Requirements
 * Python 3.9
