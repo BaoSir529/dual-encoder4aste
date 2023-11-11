@@ -42,15 +42,15 @@ warmup_steps=100
 weight_decay=0.01
 precision=16
 batch_size=4
-data_dir="../data/aste_data_bert/${dataset}"
+data_dir="../../../data/${dataset}"
 
 
-CUDA_VISIBLE_DEVICES=${CUDA_IDS} python3 aste_train.py \
+CUDA_VISIBLE_DEVICES=${CUDA_IDS} python3 ../../aste_train.py \
   --gpus=1 \
   --precision=${precision} \
   --data_dir ${data_dir} \
-  --model_name_or_path 'bert-base-uncased' \
-  --output_dir ../output/ASTE/${dataset}/ \
+  --model_name_or_path ~/bert-base-uncased \
+  --output_dir ../output/ASTE/V${version}/${dataset}/ \
   --learning_rate ${learning_rate}e-5 \
   --train_batch_size ${batch_size} \
   --eval_batch_size ${batch_size} \
