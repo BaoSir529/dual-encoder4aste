@@ -37,14 +37,7 @@ from utils.aste_datamodule import ASTEDataModule
 from utils.aste_result import Result
 from utils import params_count
 
-
 logger = logging.getLogger(__name__)
-
-# general_embedding = numpy.load('../data/V1/16res/glove.npy')
-# general_embedding = torch.from_numpy(general_embedding)
-# domain_embedding = numpy.load('../data/V1/16res/amazon.npy')
-# domain_embedding = torch.from_numpy(domain_embedding)
-
 
 class ASTE(pl.LightningModule):
     def __init__(self, hparams, data_module):
@@ -205,7 +198,7 @@ class ASTE(pl.LightningModule):
         parser.add_argument("--num_table_layers", type=int, default=2)
         parser.add_argument("--span_pruning", type=float, default=0.3)
         parser.add_argument("--seq2mat", type=str, default='none', choices=['none','tensor','context','tensorcontext'])
-        parser.add_argument("--num_d", type=int, default=64)    # 论文中tij的维度，计算hij时使用的向量空间的个数
+        parser.add_argument("--num_d", type=int, default=64)
 
         # New add for interaction layer
         parser.add_argument("--pos_dim", type=int, default=100)
