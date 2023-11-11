@@ -25,7 +25,7 @@ python ./data/v1_word2ids.py
 * You can train the model using the corresponding .sh file [./code/bash/V1/](./code/bash/V1/) or [./code/bash/V2/](./code/bash/V2/).
 * For example:
 ```bash
-python ./code/bash/V1/aste_14lap.sh
+bash aste_14lap.sh
 ```
 
 ## Citation
