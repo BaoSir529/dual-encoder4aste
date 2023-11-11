@@ -93,7 +93,7 @@ class DataCollatorForASTE:
         batch['o_start_labels'], batch['o_end_labels'] = self.start_end_labels(examples, False, length)
         batch['example_ids'] = [example['ID'] for example in examples]
         # batch['table_labels_S'] = torch.tensor([examples[i].table_label(length, 'S', (batch['input_ids'][i]>0).sum()) for i in range(len(examples))], dtype=torch.long)
-        batch['table_labels_S'] = torch.tensor([examples[i].table_label(length, 'S', len(examples[i]['tokens'])+2) for i in range(len(examples))], dtype=torch.long)    # 加2是为了cls和sep， 这里建立了每句话的表格，存储tar和opn的开始结束位置；
+        batch['table_labels_S'] = torch.tensor([examples[i].table_label(length, 'S', len(examples[i]['tokens'])+2) for i in range(len(examples))], dtype=torch.long)
         # batch['table_labels_E'] = torch.tensor([examples[i].table_label(length, 'E', (batch['input_ids'][i]>0).sum()) for i in range(len(examples))], dtype=torch.long)
         batch['table_labels_E'] = torch.tensor([examples[i].table_label(length, 'E', len(examples[i]['tokens'])+2) for i in range(len(examples))], dtype=torch.long)
 
@@ -102,7 +102,7 @@ class DataCollatorForASTE:
         for pairs in al:
             pairs_chg = []
             for p in pairs:
-                pairs_chg.append([p[0],p[1],p[2], p[3], polarity_map[p[4]]+1])  # 意见对应字典是：neg 0, neu 1, pos 2; 但是实际都+1；
+                pairs_chg.append([p[0],p[1],p[2], p[3], polarity_map[p[4]]+1])
             pairs_ret.append(pairs_chg)
         batch['pairs_true'] = pairs_ret
         
@@ -149,7 +149,7 @@ class DataCollatorForASTE:
         for sentence in text:
             tokens = sentence.strip().split()
             tokens = ['[CLS]'] + tokens + ['[SEP]']
-            subwords = list(map(self.tokenizer.tokenize, tokens))  # 得到subword列表，其中拆分的单词在一个单独的列表中
+            subwords = list(map(self.tokenizer.tokenize, tokens))
             # 记录拆分单词的详细位置
             sub_ids = 0
             sub_position = []
@@ -166,7 +166,6 @@ class DataCollatorForASTE:
             if len(token_ls) < max_length:
                 text_token_position[i] = text_token_position[i] + [[0, 0]] * (max_length - len(token_ls))
         return text_token_position
-    # positon = [[0,1], [1,2], [2, 4], [4,5], [5, 7], [7, 8], [8, 9]] 记录每个被拆分单词的位置；
 
     def tokenizer_function(self, examples):
         text = [example['sentence'] for example in examples]
@@ -198,7 +197,7 @@ class DataCollatorForASTE:
             start_label_mask = [(1 if type_ids[i]==0 else 0) for i in range(length)]
             end_label_mask   = [(1 if type_ids[i]==0 else 0) for i in range(length)]
 
-            for token_idx in range(length):     # 处理当tokenizer把一个词拆分成多个subword的情况，这时候分别记录subword的开头和结尾的位置，中间的掩码
+            for token_idx in range(length):
                 current_word_idx = word_ids[token_idx]
                 prev_word_idx = word_ids[token_idx-1] if token_idx-1 > 0 else None
                 next_word_idx = word_ids[token_idx+1] if token_idx+1 < length else None
@@ -211,8 +210,6 @@ class DataCollatorForASTE:
             start_label_masks.append(start_label_mask)
             end_label_masks.append(end_label_mask)
 
-        # generate lstm token ids
-        # TODO: 需要添加[CLS]\[SEP]占位符，还没有给lstm_tokens打包，我准备先处理一下word2ids这个字典，太乱了
         sentences = [s.strip().split() for s in text]
         # sentences = [['[CLS]'] + s.strip().split() + ['[SEP]'] for s in text]
         length = len(bert_token_position[0])-2
